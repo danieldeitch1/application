@@ -1,0 +1,11 @@
+<html>
+<head>
+</head>
+<body>
+{% for info in student_info %}
+	{% if info not in 'index' %}
+		<p>{{ info }}: {{student_info[info]}}</p>
+	{% endif %}
+{% endfor %}
+</body>
+</html>
