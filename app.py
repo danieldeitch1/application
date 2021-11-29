@@ -12,7 +12,7 @@ from os.path import isfile, join
 from flask import Flask, render_template, request
 
 # define the directory of the course
-students_path = '../course/wis-advanced-python-2021-2022/students'
+students_path = r'C:\Users\user\Desktop\flask\course\wis-advanced-python-2021-2022\students'
 
 students_dicts = []
 ind = 0;
@@ -30,9 +30,24 @@ for file_name in listdir(students_path):
 
 app = Flask(__name__)
 
-@app.route('/')
-def student_list():
-    return render_template('student_list.html',students_dicts=students_dicts)
+@app.route("/", methods=['GET'])
+def word_get():
+    return render_template('main.html')
+
+@app.route('/student_list', methods=['POST'])
+def word_post():
+    word = request.form.get('word', '')
+    if word == '':
+        return render_template('student_list.html',students_dicts=students_dicts)
+    else:
+        valid_students = [];
+        for student in students_dicts:
+            for info in student:       
+                if (info != 'index') and student[info] != None and (word in student[info]):
+                    valid_students.append(student)
+                    break
+        return render_template('student_list.html',students_dicts=valid_students)
+
 
 @app.route('/student')
 def students_info():
