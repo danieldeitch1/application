@@ -2,7 +2,9 @@
 <head>
 </head>
 <body>
-<h1>Students names:</h1>
+{% include "main.html" %}
+
+<h2> Students found: </h2>
 {% for student in students_dicts %}
 	<p><a href="{{ url_for('students_info',student_info=student['index']) }}">{{ student['name'] }}</a></p>
 {% endfor %}

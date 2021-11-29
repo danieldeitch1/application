@@ -2,6 +2,9 @@
 <head>
 </head>
 <body>
+{% include "main.html" %}
+
+<h2> Student's info: </h2>
 {% for info in student_info %}
 	{% if info not in 'index' %}
 		<p>{{ info }}: {{student_info[info]}}</p>
